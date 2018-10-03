@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<form method="post" action="{% url 'profile' %}">
+{% csrf_token %}
+<table>
+<tr>
+    <td>{{ form.mfa_enabled.label_tag }}</td>
+    <td>{{ form.mfa_enabled }}</td>
+</tr>
+</table>
+<input type="submit" value="Save">
+</form>
+
+<canvas id="qr"></canvas>
+
+<a href="{% url 'index' %}">Home</a>
+
+{% load static %}
+<script src="{% static 'qrious.min.js' %}"></script>
+<script>
+(function() {
+  let secretUrl = "{{ secret_url }}";
+  console.log(secretUrl);
+  if (secretUrl) {
+    let qr = new QRious({
+      element: document.getElementById('qr'),
+      value: secretUrl
+    });
+  }
+})();
+</script>
+
+{% endblock %}
