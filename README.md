@@ -18,6 +18,12 @@ MFA is an important strategy for modern application security. This repository pr
   $ poetry install
   ```
 
+or just use pip
+
+  ```
+  $ pip install -r requirements.txt
+  ```
+
 2. Create a user to log in as
   ```
   $ python manage.py createsuperuser --username=[your_username] --email=[your_email]
