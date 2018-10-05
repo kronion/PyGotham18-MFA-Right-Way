@@ -16,7 +16,6 @@ MFA is an important strategy for modern application security. This repository pr
 
   ```
   $ poetry install
-
   ```
 
 2. Create a user to log in as
