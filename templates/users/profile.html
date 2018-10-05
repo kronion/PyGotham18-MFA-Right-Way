@@ -1,4 +1,11 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block title %} - Profile{% endblock %}
 
 {% block content %}
 
@@ -15,18 +22,19 @@
 
 <canvas id="qr"></canvas>
 
-<a href="{% url 'index' %}">Home</a>
-
-{% load static %}
-<script src="{% static 'qrious.min.js' %}"></script>
+<script src="{% static 'js/qrious.min.js' %}"></script>
 <script>
 (function() {
   let secretUrl = "{{ secret_url }}";
-  console.log(secretUrl);
   if (secretUrl) {
+    let element = document.getElementById('qr');
+    console.log(element.style);
+    element.style.display = "initial";
+
     let qr = new QRious({
-      element: document.getElementById('qr'),
-      value: secretUrl
+      element: element,
+      value: secretUrl,
+      background: "#eee"
     });
   }
 })();

@@ -1,0 +1,47 @@
+body {
+  margin: 0;
+  font-family: 'Avenir', 'Helvetica';
+}
+
+input[type='submit'] {
+  padding: 5px 15px;
+  font-size: 14px;
+  color: #fff;
+  background-color: #9bb72a;
+}
+
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #333;
+}
+
+#navbar a {
+  margin: 10px;
+  color: #ddd;
+  text-decoration: none;
+}
+#navbar a:hover,
+#navbar a:focus {
+  color: #9bb72a;
+}
+
+#navbar .logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#navbar .panel {
+  float: right;
+}
+
+#content {
+  width: 800px;
+  margin: auto;
+  margin-top: 15px;
+  padding: 15px;
+  background-color: #eee;
+}
