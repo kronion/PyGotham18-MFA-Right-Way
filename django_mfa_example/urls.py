@@ -1,4 +1,3 @@
-from django.contrib import admin
 from django.contrib.auth.views import LogoutView
 from django.urls import path
 
@@ -8,7 +7,6 @@ from users import views as user_views
 
 urlpatterns = [
     path('', base_views.index, name='index'),
-    path('admin/', admin.site.urls),
     path('login/', user_views.MaybeOTPLoginView.as_view(), name='login'),
     path('login/token/', user_views.OTPView.as_view(), name='token'),
     path('logout/', LogoutView.as_view(), name='logout'),
