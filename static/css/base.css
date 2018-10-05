@@ -8,6 +8,10 @@ input[type='submit'] {
   font-size: 14px;
   color: #fff;
   background-color: #9bb72a;
+  cursor: pointer;
+}
+input[type='submit']:hover {
+  background-color: #8fa732;
 }
 
 #navbar {
