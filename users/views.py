@@ -12,12 +12,21 @@ from django.views.generic.edit import FormView
 from users.forms import OTPForm, ProfileForm
 
 
-class MaybeOTPLoginView(LoginView):
+class MaybeLoginView(LoginView):
+    """
+    Slightly modified version of Django's built-in LoginView. Redirects client
+    to the OTPView if MFA is enabled on the user attempting to authenticate.
+    """
+
     template_name = 'auth/login.html'
 
     def form_valid(self, form):
         user = form.get_user()
+
+        # If the OTP secret is non-empty, we take it to mean that MFA is enabled
         if user.profile.otp_secret:
+            # Store user pk in the AnonymousUser's session so that we can later
+            # find the correct MFA token in the next step
             self.request.session['user_pk'] = user.pk
 
             next_url = self.get_redirect_url()
@@ -30,6 +39,12 @@ class MaybeOTPLoginView(LoginView):
 
 
 class OTPView(FormView):
+    """
+    Manages requests associated with the OTPForm. Note that the form is
+    responsible for determining if an OTP is valid, but this class handles
+    the actual Django `login()`.
+    """
+
     form_class = OTPForm
     success_url = reverse_lazy('index')
     template_name = 'auth/otp.html'
@@ -52,6 +67,10 @@ class OTPView(FormView):
 
 
 class ProfileView(FormView):
+    """
+    Manages requests associated with the ProfileForm.
+    """
+
     form_class = ProfileForm
     template_name = 'users/profile.html'
 

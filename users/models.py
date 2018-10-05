@@ -6,12 +6,13 @@ from django.dispatch import receiver
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    otp_secret = models.CharField(max_length=16)
+    otp_secret = models.CharField(max_length=16)  # AKA the user's MFA token
 
     def __str__(self):
         return "{}".format(self.user)
 
 
+# Make sure we always create a corresponding Profile object for each new user
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
